@@ -4,18 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>css | The blog of wf</title>
+    <title>The blog of wf</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="lwf">
     
-    <meta name="description" content="1.模块最好不要混用margin-top和margin-bottom，统一使用margin-top或margin-bottom，因为相邻的模块同时使用margin-top和margin-bottom会造成边距的重合，从而带来不必要的麻烦。2当不同选择符的样式设置有冲突时.会采用权重高的选择符设置样式">
+    <meta name="description" content="解决本地项目上传到github时$git push -u origin master error failed to push some refs…等错误 
+使用命令：
+*1、touch README.md
+*2、git init
+*3、git add .
+4、git commit -m “test">
     
     
     
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="3853559530" />
-    <meta name="twitter:title" content="css | The blog of wf" />
+    <meta name="twitter:title" content="The blog of wf" />
       
     
     
@@ -74,15 +79,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/09/09/css的知识点/" title="css" itemprop="url">css</a>
+      <a href="/2015/09/10/解决本地项目上传到github的错误/" title="" itemprop="url"></a>
   </h1>
   <p class="article-author">By
     
       <a href="http://wwff.github.io" title="lwf">lwf</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-09-08T16:00:00.000Z" itemprop="datePublished">2015-09-09</time>
-    更新日期:<time datetime="2015-09-09T03:19:23.149Z" itemprop="dateModified">2015-09-09</time>
+    <time datetime="2015-09-09T16:00:00.000Z" itemprop="datePublished">2015-09-10</time>
+    更新日期:<time datetime="2015-09-10T09:39:58.275Z" itemprop="dateModified">2015-09-10</time>
     
   </p>
 </header>
@@ -94,7 +99,17 @@
 		
 		</div>
 		
-		<p>1.模块最好不要混用margin-top和margin-bottom，统一使用margin-top或margin-bottom，因为相邻的模块同时使用margin-top和margin-bottom会造成边距的重合，从而带来不必要的麻烦。<br>2当不同选择符的样式设置有冲突时.会采用权重高的选择符设置样式（html标签的权重：1, class：10, id：100， ）；如果css选择符的全中相同，样式会遵循就近原则即哪个选择符最后定义，就采用这个选择符的样式。<br>3.为了保证样式容易被覆盖，提高可维护性，css选择符需保证权重尽可能低。<br>4.a标签的四种状态的排序：lovehate原则即l(link)ov(visited)e h(hover)a(active)te<br>5.IE的专有属性：hasLayout，触发hasLayout属性的方法：①设置css属性zoom:1(最常用，最安全，成本最低的方式)②设置css属性position:relative(会带来一点副作用，在zoom:1无效的时候使用)<br>6.<br>(1)常用的块级元素：div、p、form、ul、li、ol等；常用的行内元素：span、strong、em（行内元素设置width、height属性无效）<br>(2)块级元素与行内元素的css相关属性是display，其中块级元素对应于display:block,行内元素对应于display:inline；可以通过修改display属性值来切换块级元素和行内元素<br>(3)display:inline-block,即行内的块级元素，拥有块级元素的特点，可以设置长宽width、height、margin、padding值，但不是独占一行，其宽度不占满父级元素，而是和行内元素一样，和其他行内元素排在同一行。（IE6、7不兼容该属性，可把display:inline-block改为zoom:1）<br>(4)position:absolute和float会隐式地改变display类型(display:inline-block)；position:relative不会隐式改变display属性值。<br>7、居中<br>（1）行内元素的水平居中:text-align:center<br>（2）确定宽度的块级元素的水平居中：margin-left:auto;margin-right:auto;<br>（3）不确定宽度的块级元素的水平居中：display:inline;text-align:center;<br>（4）父元素高度确定的多行文本、图片、块级元素的竖直居中的实现方法：<br>①当父元素为td、th时：使用vertical-align:middle<br>②对不支持vertical-align属性的其他块级元素，可设置：display:table-cell;vertical-align:middle;(IE6、7不支持display:table-cell;使用特定格式hack兼容)<br>8、网格布局：利用子选择器布局嵌套使用：<br>eg：<div class="content content-lr-001"><br>    <div class="main"></div><br>    <div class="sidebar"></div><br>    </div><br>    <div class="content content-lr-002"><br>    <div class="main"></div><br>    <div class="sidebar"></div><br>    </div><br>在给content-xx-xxx的宽度设置时具体单位最好使用百分比这种相对单位，使用百分比可以嵌套使用、提高重用性</p>
+		<p><em>解决本地项目上传到github时$git push -u origin master error failed to push some refs…等错误 
+</em>使用命令：</p>
+<p>*1、touch README.md</p>
+<p>*2、git init</p>
+<p>*3、git add .</p>
+<p><em>4、git commit -m “test”
+</em><br>*5、git remote add origin master</p>
+<p>*6.git push -u origin master(执行这个命令行后会弹出下面的错误，出现错误的主要原因是github中的README.md文件不在本地代码目录中)</p>
+<p>*7、可以通过以下命令解决上面的错误【注：pull=fetch+merge】</p>
+<p>*git pull –rebase origin master</p>
+<p>*8、再执行语句 git push -u origin master即可完成代码上传到github</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -104,7 +119,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://wwff.github.io/2015/09/09/css的知识点/" data-title="css | The blog of wf" data-tsina="3853559530" class="share clearfix">
+  <div data-url="http://wwff.github.io/2015/09/10/解决本地项目上传到github的错误/" data-title="The blog of wf" data-tsina="3853559530" class="share clearfix">
   </div>
 
 </div>
@@ -113,19 +128,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/09/09/CSS常用命名/" title="css的常用命名">
-  <strong>上一篇:</strong><br/>
-  <span>
-  css的常用命名</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/08/17/the-first-blog-of-lwf/"  title="the first blog of lwf">
+<a href="/2015/09/09/CSS常用命名/"  title="css的常用命名">
  <strong>下一篇:</strong><br/> 
- <span>the first blog of lwf
+ <span>css的常用命名
 </span>
 </a>
 </div>
