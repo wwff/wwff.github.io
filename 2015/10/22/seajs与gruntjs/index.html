@@ -4,18 +4,18 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>javascript面向对象 | The blog of wf</title>
+    <title>seajs+gruntjs模块化开发 | The blog of wf</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="lwf">
     
-    <meta name="description" content="//给对象添加方法、扩展类型功能Function.prototype.Method = function(name,func){    if(! this.prototype[name]){        this.prototype[name] = func;    }    return thi">
+    <meta name="description" content="作用：模块之间通过基本交互规则，能彼此引用，协同工作;防止冲突和依赖1、引入sea.js的库 http://seajs.org/docs/#downloads2、编写js模块 ,define 是一个全局函数，用来定义模块,define(factory)factory可以是对象、字符串、函数，全面解释">
     
     
     
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="3853559530" />
-    <meta name="twitter:title" content="javascript面向对象 | The blog of wf" />
+    <meta name="twitter:title" content="seajs+gruntjs模块化开发 | The blog of wf" />
       
     
     
@@ -74,15 +74,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/10/19/javascript面向对象/" title="javascript面向对象" itemprop="url">javascript面向对象</a>
+      <a href="/2015/10/22/seajs与gruntjs/" title="seajs+gruntjs模块化开发" itemprop="url">seajs+gruntjs模块化开发</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://wwff.github.io" title="lwf">lwf</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-10-19T02:24:19.000Z" itemprop="datePublished">2015-10-19</time>
-    更新日期:<time datetime="2015-10-19T02:39:58.523Z" itemprop="dateModified">2015-10-19</time>
+    <time datetime="2015-10-21T16:00:00.000Z" itemprop="datePublished">2015-10-22</time>
+    更新日期:<time datetime="2015-10-22T02:25:29.681Z" itemprop="dateModified">2015-10-22</time>
     
   </p>
 </header>
@@ -94,17 +94,13 @@
 		
 		</div>
 		
-		<p>//给对象添加方法、扩展类型功能<br>Function.prototype.Method = function(name,func){<br>    if(! this.prototype[name]){<br>        this.prototype[name] = func;<br>    }<br>    return this;<br>}</p>
-<p>//闭包：可以访问它被创建时所处的上下文环境<br>var cloSuer = (function (){<br>    var i = 1;<br>    return {<br>        geti: function (){<br>            return i;<br>        }<br>    }<br>}());</p>
-<p>/<em>判断一个对象是否是数组,.applay()与.call()的区别：call()方法接受的是一个参数列表，而 apply()方法接受的是一个包含多个参数的数组（或类数组对象）。</em>/<br> var is_array = function (value){<br>     return Object.prototype.toString.applay(value) === ‘[object Array]’;<br>     //return Object.prototype.toString.call(value) === ‘[object Array]’;<br>}</p>
-<p>//1、对象的实例化：<br>①使用new关键字<br>eg://构造函数<br>function Create(age){<br>    this.age=age;<br>}<br>var firstPerson = new Create(16);<br>②使用对象字面量(注：在属性列表的最后一个值的末尾，不要使用结尾逗号)<br>eg:var firstObject = { };<br>var obj1 = obj2 = { };//obj1与obj2引用的是同一个对象；</p>
-<p>//obj1与obj2引用的是不同对象；<br>var obj1 = { };<br>var obj2 = { };</p>
-<p>2、javascript没有类，使用原型继承</p>
-<p>3、如果函数没有返回一个特定的值，则将会返回一个undefined值</p>
-<p>4、闭包是一个处在函数体中的 并引用了函数体当前执行上下文中的变量的函数，闭包可以减少命名空间的冲突</p>
-<p>5、数组的创建：<br>①使用Array()构造函数<br>eg: var arr1 = new Array();<br>②使用数组字面量[];<br>eg: var arr1 = [1,2];</p>
-<p>6、删除一个数组元素不会改变数组的长度，只是会将该元素置为空，留下一个空元素</p>
-<p>7、未指定类型添加方法的代码：<br>Function.prototype.method = function(name, func){<br>    this.prototype[name] = func;<br>    return this;<br>}</p>
+		<p>作用：模块之间通过基本交互规则，能彼此引用，协同工作;防止冲突和依赖<br>1、引入sea.js的库 <a href="http://seajs.org/docs/#downloads" target="_blank" rel="external">http://seajs.org/docs/#downloads</a><br>2、编写js模块 ,define 是一个全局函数，用来定义模块,define(factory)<br>factory可以是对象、字符串、函数，全面解释：<a href="https://github.com/seajs/seajs/issues/242" target="_blank" rel="external">https://github.com/seajs/seajs/issues/242</a><br>接下来主要介绍factory是函数的情况：<br>define(function(require,exports,module){<br>    //编写功能的JavaScript 代码<br>    ①require 是一个方法，接受 模块标识 作为唯一参数，用来获取其他模块提供的接口；<br>    require的更多方法<a href="http://blog.csdn.net/qq_21773607/article/details/49329329" target="_blank" rel="external">http://blog.csdn.net/qq_21773607/article/details/49329329</a><br>    ②exports 是一个对象，用来向外提供模块接口，除了给 exports 对象增加成员，还可以使用 return 直接向外提供接口；<br>    ③module 是一个对象，上面存储了与当前模块相关联的一些属性和方法。<br>});<br>3.通过seajs.use异步加载模块、exports调用模块</p>
+<p>//模块化<br>服务器端模块化的规范<br>nodeJS的出现（<a href="http://nodejs.org/）" target="_blank" rel="external">http://nodejs.org/）</a><br>commonJS规范（<a href="http://www.commonjs.org/）" target="_blank" rel="external">http://www.commonjs.org/）</a></p>
+<p>浏览器JS的模块化的规范<br>AMD规范（<a href="http://wiki.commonjs.org/wiki/Modules/AsynchronousDefinition）" target="_blank" rel="external">http://wiki.commonjs.org/wiki/Modules/AsynchronousDefinition）</a><br>requireJS库（<a href="http://requirejs.org/" target="_blank" rel="external">http://requirejs.org/</a><br>CMD规范：详解请参考<a href="http://blog.csdn.net/qq_21773607/article/details/49329329" target="_blank" rel="external">http://blog.csdn.net/qq_21773607/article/details/49329329</a><br>Seajs采用的</p>
+<p>//gruntjs搭建线上与线下开发<br>gruntjs: <a href="http://gruntjs.com/" target="_blank" rel="external">http://gruntjs.com/</a> </p>
+<p>安装流程<br>先安装nodejs和npm(包管理工具)<br>npm install -g grunt-cli<br>npm install grunt –save-dev<br>grunt –versionnpm install grunt –save-dev</p>
+<p>使用流程<br>插件的概念<br>package.json<br>Gruntfile.js</p>
+<p>Seajs + gruntjs开发<br>grunt-cmd-transport<br>grunt-cmd-concat</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -114,7 +110,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://wwff.github.io/2015/10/19/javascript面向对象/" data-title="javascript面向对象 | The blog of wf" data-tsina="3853559530" class="share clearfix">
+  <div data-url="http://wwff.github.io/2015/10/22/seajs与gruntjs/" data-title="seajs+gruntjs模块化开发 | The blog of wf" data-tsina="3853559530" class="share clearfix">
   </div>
 
 </div>
@@ -123,19 +119,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/10/22/seajs与gruntjs/" title="seajs+gruntjs模块化开发">
-  <strong>上一篇:</strong><br/>
-  <span>
-  seajs+gruntjs模块化开发</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/09/09/CSS常用命名/"  title="css的常用命名">
+<a href="/2015/10/19/javascript面向对象/"  title="javascript面向对象">
  <strong>下一篇:</strong><br/> 
- <span>css的常用命名
+ <span>javascript面向对象
 </span>
 </a>
 </div>
