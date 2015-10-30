@@ -4,18 +4,18 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>seajs+gruntjs模块化开发 | The blog of wf</title>
+    <title>javascript性能优化 | The blog of wf</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="lwf">
     
-    <meta name="description" content="作用：模块之间通过基本交互规则，能彼此引用，协同工作;防止冲突和依赖1、引入sea.js的库 http://seajs.org/docs/#downloads2、编写js模块 ,define 是一个全局函数，用来定义模块,define(factory)factory可以是对象、字符串、函数，全面解释">
+    <meta name="description" content="javascript性能优化一、DOM1、减少访问DOM的次数，把运算量尽量留在ECMAscript端处理（因为访问dom的次数越多，代码运行速度越慢）；2、HTML集合它是包含了dom节点引用的类数组对象（没有数组对象特有的方法：eg：push()、slice()等，但提供了类似数组的length">
     
     
     
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="3853559530" />
-    <meta name="twitter:title" content="seajs+gruntjs模块化开发 | The blog of wf" />
+    <meta name="twitter:title" content="javascript性能优化 | The blog of wf" />
       
     
     
@@ -74,15 +74,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/10/22/seajs与gruntjs/" title="seajs+gruntjs模块化开发" itemprop="url">seajs+gruntjs模块化开发</a>
+      <a href="/2015/10/30/javascript性能优化/" title="javascript性能优化" itemprop="url">javascript性能优化</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://wwff.github.io" title="lwf">lwf</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-10-21T16:00:00.000Z" itemprop="datePublished">2015-10-22</time>
-    更新日期:<time datetime="2015-10-22T02:25:29.681Z" itemprop="dateModified">2015-10-22</time>
+    <time datetime="2015-10-29T16:00:00.000Z" itemprop="datePublished">2015-10-30</time>
+    更新日期:<time datetime="2015-10-30T09:00:31.488Z" itemprop="dateModified">2015-10-30</time>
     
   </p>
 </header>
@@ -91,16 +91,17 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#javascript性能优化"><span class="toc-number">1.</span> <span class="toc-text">javascript性能优化</span></a></li></ol>
 		</div>
 		
-		<p>作用：模块之间通过基本交互规则，能彼此引用，协同工作;防止冲突和依赖<br>1、引入sea.js的库 <a href="http://seajs.org/docs/#downloads" target="_blank" rel="external">http://seajs.org/docs/#downloads</a><br>2、编写js模块 ,define 是一个全局函数，用来定义模块,define(factory)<br>factory可以是对象、字符串、函数，全面解释：<a href="https://github.com/seajs/seajs/issues/242" target="_blank" rel="external">https://github.com/seajs/seajs/issues/242</a><br>接下来主要介绍factory是函数的情况：<br>define(function(require,exports,module){<br>    //编写功能的JavaScript 代码<br>    ①require 是一个方法，接受 模块标识 作为唯一参数，用来获取其他模块提供的接口；<br>    require的更多方法<a href="http://blog.csdn.net/qq_21773607/article/details/49329329" target="_blank" rel="external">http://blog.csdn.net/qq_21773607/article/details/49329329</a><br>    ②exports 是一个对象，用来向外提供模块接口，除了给 exports 对象增加成员，还可以使用 return 直接向外提供接口；<br>    ③module 是一个对象，上面存储了与当前模块相关联的一些属性和方法。<br>});<br>3.通过seajs.use异步加载模块、exports调用模块</p>
-<p>//模块化<br>服务器端模块化的规范<br>nodeJS的出现（<a href="http://nodejs.org/）" target="_blank" rel="external">http://nodejs.org/）</a><br>commonJS规范（<a href="http://www.commonjs.org/）" target="_blank" rel="external">http://www.commonjs.org/）</a></p>
-<p>浏览器JS的模块化的规范<br>AMD规范（<a href="http://wiki.commonjs.org/wiki/Modules/AsynchronousDefinition）" target="_blank" rel="external">http://wiki.commonjs.org/wiki/Modules/AsynchronousDefinition）</a><br>requireJS库（<a href="http://requirejs.org/" target="_blank" rel="external">http://requirejs.org/</a><br>CMD规范：详解请参考<a href="http://blog.csdn.net/qq_21773607/article/details/49329329" target="_blank" rel="external">http://blog.csdn.net/qq_21773607/article/details/49329329</a><br>Seajs采用的</p>
-<p>//gruntjs搭建线上与线下开发<br>gruntjs: <a href="http://gruntjs.com/" target="_blank" rel="external">http://gruntjs.com/</a> </p>
-<p>安装流程<br>先安装nodejs和npm(包管理工具)<br>npm install -g grunt-cli<br>npm install grunt –save-dev<br>grunt –versionnpm install grunt –save-dev</p>
-<p>使用流程<br>插件的概念<br>package.json<br>Gruntfile.js</p>
-<p>Seajs + gruntjs开发<br>grunt-cmd-transport<br>grunt-cmd-concat</p>
+		<h2 id="javascript性能优化">javascript性能优化</h2><p>一、DOM<br>1、减少访问DOM的次数，把运算量尽量留在ECMAscript端处理（因为访问dom的次数越多，代码运行速度越慢）；<br>2、HTML集合<br>它是包含了dom节点引用的类数组对象（没有数组对象特有的方法：eg：push()、slice()等，但提供了类似数组的length属性，同时也能以数字索引的方式访问列表中元素）<br>‘’’ document.getElementsByName();<br>document.getElementsByClassName();<br>document.getElementsByTagName();<br>‘’’<br>等方法的返回值都是html集合，<br>此外，document.images,document.links,document.forms,document.forms[0].elements,childNodes等属性的返回值均为html集合；<br>注：导致html集合低效的因素：html集合是以一种“假定时态”实时存在，而且一直与文档保持连续，所以当你每次需要最新信息时（刷新），都会重复执行查询的过程；<br>所以，在循环的条件控制语句中并不推荐读取数组的length属性的做法，推荐应该将length存在一个局部变量中，然后再在循环语句中使用（读取一个集合的length比读取普通数组的length要慢很多（因为每次都要重新查询））<br>建议：在循环中使用局部变量存储集合引用和集合元素<br>3、DOM元素<br>（1）在所有浏览器中children都比childNodes快（特别是IE）<br>（2）使用选择器API代替getElementsByTagName()获取dom节点会提升访问速度<br><img src="selectAPI.png" alt="选择器API与getElementsByTagName区别"><br>        eg: var elements = document.querySelectorAll(‘#navi a’);返回一个引用列表NodeList（包含着匹配节点的类数组对象不是html集合不会对应实时文档结构，避免了html集合引起的性能）<br>4、最小化重绘和重排</p>
+<p>二、算法和流程控制<br>1、在for循环中初始化var语句创建的都是函数级变量，而不是循环级；<br>2、建议不要使用for-in循环遍历数组成员，在js的四种循环中，for-in循环最慢吗，其他三种都差不多<br>当需要便利一个属性数量未知的对象时才使用for-in循环<br>‘’’ ① for(){</p>
+<pre><code>}<span class="comment">;</span>
+</code></pre><p>② while(){</p>
+<pre><code>}<span class="comment">;</span>
+</code></pre><p>③ do{</p>
+<pre><code>}<span class="keyword">while</span><span class="comment">()</span>;
+</code></pre><p>‘’’<br>注：当所要执行的效果与数组（类数组）的顺序无关时，可以通过颠倒顺序来提高循环性能<br>3、优化if-else<br>（1）将最可能出现的条件放在首位<br>（2）把if-else组织成一系列嵌套的if-else语句<br>4、在判断条件较多时，使用查找表比if-else 、switch快<br>5、当遇到栈溢出错误时，可将方法改为迭代算法，或使用Memoization来避免重复计算<br><a href="http://blog.csdn.net/qq_21773607/article/details/49513327" target="_blank" rel="external">详解Memoization</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -110,7 +111,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://wwff.github.io/2015/10/22/seajs与gruntjs/" data-title="seajs+gruntjs模块化开发 | The blog of wf" data-tsina="3853559530" class="share clearfix">
+  <div data-url="http://wwff.github.io/2015/10/30/javascript性能优化/" data-title="javascript性能优化 | The blog of wf" data-tsina="3853559530" class="share clearfix">
   </div>
 
 </div>
@@ -119,19 +120,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/10/30/javascript性能优化/" title="javascript性能优化">
-  <strong>上一篇:</strong><br/>
-  <span>
-  javascript性能优化</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/10/19/javascript面向对象/"  title="javascript面向对象">
+<a href="/2015/10/22/seajs与gruntjs/"  title="seajs+gruntjs模块化开发">
  <strong>下一篇:</strong><br/> 
- <span>javascript面向对象
+ <span>seajs+gruntjs模块化开发
 </span>
 </a>
 </div>
@@ -148,7 +141,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#javascript性能优化"><span class="toc-number">1.</span> <span class="toc-text">javascript性能优化</span></a></li></ol>
   </div>
 
 <div id="asidepart">
