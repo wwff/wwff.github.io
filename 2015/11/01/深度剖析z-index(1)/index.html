@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>web代码语义化 | The blog of wf</title>
+    <title>理解 CSS 的 z-index 属性 | The blog of wf</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="lwf">
     
-    <meta name="description" content="一、创建良好的标记（代码语义化）（1）中的内容可以明显的提高页面在搜索引擎中的排名注意：根据文档内容的结构而选择html元素，而不是根据html元素的样式（2）避免过度使用div和span，但并不意味着避免使用div和span，几个合理位置中的div可以让文档显得井井有序。（3）css布局存在一个常">
+    <meta name="description" content="CSS 的 z-index 属性1、所有的盒模型元素都处于三维坐标系中。 除了我们常用的横坐标和纵坐标， 盒模型元素还可以沿着“z轴”层叠摆放， 当他们相互覆盖时， z轴顺序就变得十分重要。2、元素默认的摆放规则假定元素没有指定z-index属性，那么元素按照如下顺序叠放（从底到顶）根元素的背景和边">
     
     
     
@@ -69,15 +69,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/10/31/web代码语义化/" title="web代码语义化" itemprop="url">web代码语义化</a>
+      <a href="/2015/11/01/深度剖析z-index(1)/" title="理解 CSS 的 z-index 属性" itemprop="url">理解 CSS 的 z-index 属性</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://wwff.github.io" title="lwf">lwf</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-10-31T13:42:00.447Z" itemprop="datePublished">2015-10-31</time>
-    更新日期:<time datetime="2015-10-31T13:42:00.447Z" itemprop="dateModified">2015-10-31</time>
+    <time datetime="2015-11-01T06:40:44.616Z" itemprop="datePublished">2015-11-01</time>
+    更新日期:<time datetime="2015-11-01T06:39:19.097Z" itemprop="dateModified">2015-11-01</time>
     
   </p>
 </header>
@@ -86,11 +86,38 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS_的_z-index_属性"><span class="toc-number">1.</span> <span class="toc-text">CSS 的 z-index 属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、所有的盒模型元素都处于三维坐标系中。_除了我们常用的横坐标和纵坐标，_盒模型元素还可以沿着“z轴”层叠摆放，_当他们相互覆盖时，_z轴顺序就变得十分重要。"><span class="toc-number">1.1.</span> <span class="toc-text">1、所有的盒模型元素都处于三维坐标系中。 除了我们常用的横坐标和纵坐标， 盒模型元素还可以沿着“z轴”层叠摆放， 当他们相互覆盖时， z轴顺序就变得十分重要。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、元素默认的摆放规则"><span class="toc-number">1.2.</span> <span class="toc-text">2、元素默认的摆放规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、浮动"><span class="toc-number">1.3.</span> <span class="toc-text">3、浮动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用_z-index"><span class="toc-number">1.4.</span> <span class="toc-text">使用 z-index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#堆叠上下文"><span class="toc-number">1.5.</span> <span class="toc-text">堆叠上下文</span></a></li></ol></li></ol>
 		</div>
 		
-		<p>一、创建良好的标记（代码语义化）<br>（1）<title></title>中的内容可以明显的提高页面在搜索引擎中的排名<br>注意：根据文档内容的结构而选择html元素，而不是根据html元素的样式<br>（2）避免过度使用div和span，但并不意味着避免使用div和span，几个合理位置中的div可以让文档显得井井有序。<br>（3）css布局存在一个常见的问题：FOUC（无样式内容瞬间，Flash of Unstyled Content）,在IE浏览器中，若以import而不是link的形式引入css，则会发生FOUC现象。但只要在html文档中<br>的head部分存在着一个script或者link元素，则可以避免FOUC。<br>（4）通过将内容置于html页面中并使用背景图像创建样式，网站能得到很多极为明显的改善：<br>   ①通过改进标记的方法，降低了页面文件的大小。<br>   ②由于css样式将被浏览器缓存，浏览器不用每次都从服务器端重复取得css样式，这样就大大加快了页面的加载速度。<br>   ③网站的可访问性增强（因为html中没有任何表示样式的相关代码）<br>   ④网站更易于管理<br> （5）可以使用z-index属性设置固定元素的前后位置关系，高z-index的元素将覆盖低z-index元素<br> 注意：IE不仅不支持固定定位position:fixed; 还不支持子选择器<br>  （6）用px作为单位进行绝对定位将能够精确地控制布局，但丧失了灵活性即一旦给定了元素的位置，那么它将<br>始终固定在原地。但若是用em作为left，right，top，bottom等属性的单位，元素的位置将会变得更加灵活些即<br>元素位置会根据用户选择不同的字号而相应改变。<br>  （7）</p>
-  
+		<h2 id="CSS_的_z-index_属性">CSS 的 z-index 属性</h2><h3 id="1、所有的盒模型元素都处于三维坐标系中。_除了我们常用的横坐标和纵坐标，_盒模型元素还可以沿着“z轴”层叠摆放，_当他们相互覆盖时，_z轴顺序就变得十分重要。">1、所有的盒模型元素都处于三维坐标系中。 除了我们常用的横坐标和纵坐标， 盒模型元素还可以沿着“z轴”层叠摆放， 当他们相互覆盖时， z轴顺序就变得十分重要。</h3><h3 id="2、元素默认的摆放规则">2、元素默认的摆放规则</h3><p>假定元素没有指定z-index属性，那么元素按照如下顺序叠放（从底到顶）<br>根元素的背景和边界普通流(无定位)里的块元素(没有position或者position:static;)按HTML中的出现顺序堆叠<br>定位元素按HTML中的出现顺序堆叠<br><img src="http://sfault-image.b0.upaiyun.com/4c/b1/4cb1b8ae38654ad06de12851fed6d038" alt="元素默认的摆放规则"></p>
+<h3 id="3、浮动">3、浮动</h3><p>对于浮动的块元素来说，堆叠顺序变得有些不同。浮动块元素被放置于非定位块元素与定位块元素之间：<br>（1）根元素的背景与边框<br>（2）位于普通流中的后代块元素按照它们在 HTML 中出现的顺序堆叠<br>（3）浮动块元素<br>（4）常规流中的后代行内元素<br>（5）后代中的定位元素按照它们在 HTML 中出现的顺序堆叠<br><img src="http://sfault-image.b0.upaiyun.com/ec/16/ec16ce3a61f808acd728f28280fbff72" alt="元素浮动的摆放规则"></p>
+<h3 id="使用_z-index">使用 z-index</h3><p>（注意：需要给使用z-index属性的元素指定position属性，否则z-index无效）<br>如果需要改变默认的摆放顺序，只需给元素指定z-index。z-index必须是整数，体现了元素在z轴的位置：</p>
+<pre><code>底层：距离观察者最远
+……
+-<span class="number">3</span> 层
+-<span class="number">2</span> 层
+-<span class="number">1</span> 层
+<span class="number">0</span> 层 （默认）
+<span class="number">1</span> 层
+<span class="number">2</span> 层
+<span class="number">3</span> 层
+……
+顶层：最接近观察者
+</code></pre><p>没有指定z-index的时候，所有元素默认在0层渲染。多个元素的z-index属性相同时，将按照上文描述的顺序布局。</p>
+<p><img src="http://sfault-image.b0.upaiyun.com/a4/81/a4819c8d529008010267357d09189d26" alt="使用z-index排序"><br>注意，div#5的z-index无效，因为未指定position属性</p>
+<h3 id="堆叠上下文">堆叠上下文</h3><p>指定z-index属性将构造一个堆叠上下文。</p>
+<p>以下元素构成堆叠上下文指：</p>
+<pre><code>根元素<span class="tag">html</span>
+定位元素，且其<span class="attribute">z-index</span>值不为<span class="attribute">auto</span>
+<span class="attribute">opacity</span>小于<span class="number">1</span>的元素
+在移动WebKit、Chrome22+以上，指定<span class="attribute">position</span>: fixed的元素总是会构造堆叠上下文，即使<span class="attribute">z-index</span>为<span class="attribute">auto</span>。
+</code></pre><p>堆叠上下文中的子元素按照前述顺序摆放。堆叠上下文内部的子堆叠上下文的z-index只在父堆叠上下文中有意义。</p>
+<p>总而言之：</p>
+<pre><code><span class="attribute">z-index</span>不为<span class="attribute">auto</span>，<span class="attribute">opacity</span>小于1的元素会构建堆叠上下文。
+堆叠上下文可以嵌入其他堆叠上下文。
+每个堆叠上下文和它的同级上下文是独立的。
+每个堆叠上下文是自包含的。
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 
@@ -99,7 +126,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://wwff.github.io/2015/10/31/web代码语义化/" data-title="web代码语义化 | The blog of wf" data-tsina="3853559530" class="share clearfix">
+  <div data-url="http://wwff.github.io/2015/11/01/深度剖析z-index(1)/" data-title="理解 CSS 的 z-index 属性 | The blog of wf" data-tsina="3853559530" class="share clearfix">
   </div>
 
 </div>
@@ -108,19 +135,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/11/01/深度剖析z-index(1)/" title="理解 CSS 的 z-index 属性">
-  <strong>上一篇:</strong><br/>
-  <span>
-  理解 CSS 的 z-index 属性</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/10/30/javascript性能优化/"  title="javascript性能优化">
+<a href="/2015/10/31/web代码语义化/"  title="web代码语义化">
  <strong>下一篇:</strong><br/> 
- <span>javascript性能优化
+ <span>web代码语义化
 </span>
 </a>
 </div>
@@ -137,7 +156,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS_的_z-index_属性"><span class="toc-number">1.</span> <span class="toc-text">CSS 的 z-index 属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、所有的盒模型元素都处于三维坐标系中。_除了我们常用的横坐标和纵坐标，_盒模型元素还可以沿着“z轴”层叠摆放，_当他们相互覆盖时，_z轴顺序就变得十分重要。"><span class="toc-number">1.1.</span> <span class="toc-text">1、所有的盒模型元素都处于三维坐标系中。 除了我们常用的横坐标和纵坐标， 盒模型元素还可以沿着“z轴”层叠摆放， 当他们相互覆盖时， z轴顺序就变得十分重要。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、元素默认的摆放规则"><span class="toc-number">1.2.</span> <span class="toc-text">2、元素默认的摆放规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、浮动"><span class="toc-number">1.3.</span> <span class="toc-text">3、浮动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用_z-index"><span class="toc-number">1.4.</span> <span class="toc-text">使用 z-index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#堆叠上下文"><span class="toc-number">1.5.</span> <span class="toc-text">堆叠上下文</span></a></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
