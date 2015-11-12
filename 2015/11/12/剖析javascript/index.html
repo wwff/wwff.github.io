@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>The blog of wf</title>
+    <title>javascript基础知识（一） | The blog of wf</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="lwf">
     
-    <meta name="description" content="1.在使用for-in循环语句之前，先检测确认该对象的值不是null或undefined2.不推荐使用with语句，严格模式下不允许使用with语句，否则视为语法错误3.在函数中，位于return语句后的任何代码都永远不会被执行4.arguments的值永远与对应命名参数的值保持同步，argumen">
+    <meta name="description" content="javascript基础知识1.在使用for-in循环语句之前，先检测确认该对象的值不是null或undefined2.不推荐使用with语句，严格模式下不允许使用with语句，否则视为语法错误3.在函数中，位于return语句后的任何代码都永远不会被执行4.arguments的值永远与对应命名参数">
     
     
     
@@ -69,15 +69,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/11/12/剖析javascript/" title="" itemprop="url"></a>
+      <a href="/2015/11/12/剖析javascript/" title="javascript基础知识（一）" itemprop="url">javascript基础知识（一）</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://wwff.github.io" title="lwf">lwf</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-11-12T14:18:44.249Z" itemprop="datePublished">2015-11-12</time>
-    更新日期:<time datetime="2015-11-12T14:18:44.157Z" itemprop="dateModified">2015-11-12</time>
+    <time datetime="2015-11-12T14:22:23.799Z" itemprop="datePublished">2015-11-12</time>
+    更新日期:<time datetime="2015-11-12T14:22:23.799Z" itemprop="dateModified">2015-11-12</time>
     
   </p>
 </header>
@@ -86,10 +86,10 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript基础知识"><span class="toc-number">1.</span> <span class="toc-text">javascript基础知识</span></a></li></ol>
 		</div>
 		
-		<p>1.在使用for-in循环语句之前，先检测确认该对象的值不是null或undefined<br>2.不推荐使用with语句，严格模式下不允许使用with语句，否则视为语法错误<br>3.在函数中，位于return语句后的任何代码都永远不会被执行<br>4.arguments的值永远与对应命名参数的值保持同步，arguments对象的长度由传入的参数决定的<br>5.javascript中在操作对象时，实际上是操作对象的引用而不是实际的对象<br>6.在javascript中，for语句、if语句中的变量声明会将变量添加到当前的if执行的外部执行环境中<br>eg:<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">window.onload = <span class="function"><span class="keyword">function</span><span class="params">()</span> &#123;</span></span><br><span class="line">	<span class="keyword">if</span><span class="params">(<span class="literal">true</span>)</span>&#123;</span><br><span class="line">		var <span class="built_in">color</span> = <span class="string">"blue"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	console.<span class="built_in">log</span><span class="params">( color )</span>; <span class="comment">// "blue"</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span><span class="params">(var i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)</span>&#123;</span><br><span class="line">		var sum = <span class="number">0</span> ;</span><br><span class="line">		sum = sum + i ;</span><br><span class="line">	&#125;</span><br><span class="line">	console.<span class="built_in">log</span><span class="params">(sum)</span>; <span class="comment">//4</span></span><br><span class="line">	console.<span class="built_in">log</span><span class="params">(i)</span>; <span class="comment">//5</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+		<h3 id="javascript基础知识">javascript基础知识</h3><p>1.在使用for-in循环语句之前，先检测确认该对象的值不是null或undefined<br>2.不推荐使用with语句，严格模式下不允许使用with语句，否则视为语法错误<br>3.在函数中，位于return语句后的任何代码都永远不会被执行<br>4.arguments的值永远与对应命名参数的值保持同步，arguments对象的长度由传入的参数决定的<br>5.javascript中在操作对象时，实际上是操作对象的引用而不是实际的对象<br>6.在javascript中，for语句、if语句中的变量声明会将变量添加到当前的if执行的外部执行环境中<br>eg:<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">window.onload = <span class="function"><span class="keyword">function</span><span class="params">()</span> &#123;</span></span><br><span class="line">	<span class="keyword">if</span><span class="params">(<span class="literal">true</span>)</span>&#123;</span><br><span class="line">		var <span class="built_in">color</span> = <span class="string">"blue"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	console.<span class="built_in">log</span><span class="params">( color )</span>; <span class="comment">// "blue"</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span><span class="params">(var i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)</span>&#123;</span><br><span class="line">		var sum = <span class="number">0</span> ;</span><br><span class="line">		sum = sum + i ;</span><br><span class="line">	&#125;</span><br><span class="line">	console.<span class="built_in">log</span><span class="params">(sum)</span>; <span class="comment">//4</span></span><br><span class="line">	console.<span class="built_in">log</span><span class="params">(i)</span>; <span class="comment">//5</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>7.管理内存：优化内存的最佳方式：就是为执行中的代码只保存必要的数据，一旦数据不再有用，最好通过将其值设置为null来释放其引用即解除引用（让值脱离执行环境，以便垃圾收集器下次运行时将其回收）<br>eg:<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">createPig</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">var</span> pig = <span class="keyword">new</span> ObJECT();</span><br><span class="line">		pig.name = name;</span><br><span class="line">		<span class="keyword">return</span> pig;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> globalPig = createPig(<span class="string">"Mary"</span>);</span><br><span class="line">	<span class="comment">//解除引用</span></span><br><span class="line">	globalPig = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>8.数组Array<br>（1）数组的排序方法 .sort();<br>完善版：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function <span class="title">compare</span><span class="params">(value1,value2)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> value1 - value2;</span><br><span class="line">&#125;</span><br><span class="line">var arr = [<span class="number">0</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">29</span>];</span><br><span class="line">arr.sort(compare);</span><br><span class="line">console.<span class="built_in">log</span>(arr);</span><br></pre></td></tr></table></figure></p>
 <p> （2）slice()与splice()方法的介绍<br>     ①slice()<br>         slice()方法接收一或两个参数，即要返回项的起止索引值，如果只有一个参数则返回从该参数指定位置开始到当前数组末尾的所有项;当有两个参数的时候，返回起始位置和结束为止之间的项（但此时不包括结束位置的项）;slice()方法不会影响原数组;<br>         <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">eg: function()&#123;</span><br><span class="line">		var ages = [<span class="number">12</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">6</span>,<span class="number">27</span>,<span class="number">18</span>];</span><br><span class="line">		var age1 = ages.slice(<span class="number">2</span>); </span><br><span class="line">		var age2 = ages.slice(<span class="number">2</span>,<span class="number">4</span>); </span><br><span class="line">		console.<span class="built_in">log</span>(age1);  <span class="comment">//8,6,27,18</span></span><br><span class="line">		console.<span class="built_in">log</span>(age2);  <span class="comment">//8,6</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
@@ -112,7 +112,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://wwff.github.io/2015/11/12/剖析javascript/" data-title="The blog of wf" data-tsina="3853559530" class="share clearfix">
+  <div data-url="http://wwff.github.io/2015/11/12/剖析javascript/" data-title="javascript基础知识（一） | The blog of wf" data-tsina="3853559530" class="share clearfix">
   </div>
 
 </div>
@@ -142,7 +142,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript基础知识"><span class="toc-number">1.</span> <span class="toc-text">javascript基础知识</span></a></li></ol>
   </div>
 
 <div id="asidepart">
