@@ -1,0 +1,355 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>javascript基础知识（一） | The blog of wf</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="lwf">
+    
+    <meta name="description" content="javascript基础知识1.在使用for-in循环语句之前，先检测确认该对象的值不是null或undefined2.不推荐使用with语句，严格模式下不允许使用with语句，否则视为语法错误3.在函数中，位于return语句后的任何代码都永远不会被执行4.arguments的值永远与对应命名参数">
+    
+    
+    
+    
+    <link rel="alternate" href="https://github.com/wwff.atom## RSS address." title="The blog of wf" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="The blog of wf" title="The blog of wf"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="The blog of wf">The blog of wf</a></h1>
+				<h2 class="blog-motto">不求做的最好，但求做的更好。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">主页 | Home</a></li>
+					
+						<li><a href="/archives">所有文章 | Archives</a></li>
+					
+						<li><a href="/about">简介 | About</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:wwff.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/12/剖析javascript/" title="javascript基础知识（一）" itemprop="url">javascript基础知识（一）</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://wwff.github.io" title="lwf">lwf</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2015-11-12T14:24:18.496Z" itemprop="datePublished">2015-11-12</time>
+    更新日期:<time datetime="2015-11-12T14:24:18.496Z" itemprop="dateModified">2015-11-12</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript基础知识"><span class="toc-number">1.</span> <span class="toc-text">javascript基础知识</span></a></li></ol>
+		</div>
+		
+		<h3 id="javascript基础知识">javascript基础知识</h3><p>1.在使用for-in循环语句之前，先检测确认该对象的值不是null或undefined<br>2.不推荐使用with语句，严格模式下不允许使用with语句，否则视为语法错误<br>3.在函数中，位于return语句后的任何代码都永远不会被执行<br>4.arguments的值永远与对应命名参数的值保持同步，arguments对象的长度由传入的参数决定的<br>5.javascript中在操作对象时，实际上是操作对象的引用而不是实际的对象<br>6.在javascript中，for语句、if语句中的变量声明会将变量添加到当前的if执行的外部执行环境中<br>eg:<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">window.onload = <span class="function"><span class="keyword">function</span><span class="params">()</span> &#123;</span></span><br><span class="line">	<span class="keyword">if</span><span class="params">(<span class="literal">true</span>)</span>&#123;</span><br><span class="line">		var <span class="built_in">color</span> = <span class="string">"blue"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	console.<span class="built_in">log</span><span class="params">( color )</span>; <span class="comment">// "blue"</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span><span class="params">(var i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)</span>&#123;</span><br><span class="line">		var sum = <span class="number">0</span> ;</span><br><span class="line">		sum = sum + i ;</span><br><span class="line">	&#125;</span><br><span class="line">	console.<span class="built_in">log</span><span class="params">(sum)</span>; <span class="comment">//4</span></span><br><span class="line">	console.<span class="built_in">log</span><span class="params">(i)</span>; <span class="comment">//5</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>7.管理内存：优化内存的最佳方式：就是为执行中的代码只保存必要的数据，一旦数据不再有用，最好通过将其值设置为null来释放其引用即解除引用（让值脱离执行环境，以便垃圾收集器下次运行时将其回收）<br>eg:<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">createPig</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">var</span> pig = <span class="keyword">new</span> ObJECT();</span><br><span class="line">		pig.name = name;</span><br><span class="line">		<span class="keyword">return</span> pig;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> globalPig = createPig(<span class="string">"Mary"</span>);</span><br><span class="line">	<span class="comment">//解除引用</span></span><br><span class="line">	globalPig = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>8.数组Array<br>（1）数组的排序方法 .sort();<br>完善版：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function <span class="title">compare</span><span class="params">(value1,value2)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> value1 - value2;</span><br><span class="line">&#125;</span><br><span class="line">var arr = [<span class="number">0</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">29</span>];</span><br><span class="line">arr.sort(compare);</span><br><span class="line">console.<span class="built_in">log</span>(arr);</span><br></pre></td></tr></table></figure></p>
+<p> （2）slice()与splice()方法的介绍<br>     ①slice()<br>         slice()方法接收一或两个参数，即要返回项的起止索引值，如果只有一个参数则返回从该参数指定位置开始到当前数组末尾的所有项;当有两个参数的时候，返回起始位置和结束为止之间的项（但此时不包括结束位置的项）;slice()方法不会影响原数组;<br>         <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">eg: function()&#123;</span><br><span class="line">		var ages = [<span class="number">12</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">6</span>,<span class="number">27</span>,<span class="number">18</span>];</span><br><span class="line">		var age1 = ages.slice(<span class="number">2</span>); </span><br><span class="line">		var age2 = ages.slice(<span class="number">2</span>,<span class="number">4</span>); </span><br><span class="line">		console.<span class="built_in">log</span>(age1);  <span class="comment">//8,6,27,18</span></span><br><span class="line">		console.<span class="built_in">log</span>(age2);  <span class="comment">//8,6</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<pre><code>② splice()
+    splice()方法主要用于向数组的中部插入项，可传入多个参数
+    当需要删除当前数组中的项时只需传入两个参数即要删除的第一项的位置和要删除的项数。
+    eg: arr.splice(<span class="number">0</span>,<span class="number">2</span>); <span class="comment">//即要删除数组arr前两项</span>
+    当需要向指定位置插入任意数量项的时候可以传入三个参数：起始插入位置、<span class="number">0</span>要删除的项数、要插入的任意数量项;
+    eg：arr.splice(<span class="number">2</span>,<span class="number">0</span>,<span class="string">"r"</span>,<span class="string">"g"</span>);
+    当需要替换当前数组的指定项时，只需传入三个参数：起始插入位置、要删除的项数、要插入的任意数量项；
+    eg: arr.splice(<span class="number">1</span>,<span class="number">1</span>,<span class="string">"r"</span>,<span class="string">"y"</span>);
+</code></pre><p> 9.parseInt()与parseFloat()的区别<br>     （1）parseInt()方法首先查看位置0处的 字符，判断它是否是个有效数字；如果不是，该方法将返回NaN，不再继续    执行其他操作。但如果该字符是有效数字，该方法将查看位置1处的字符，进行同样的                               测试。这一过程将持续到发现非有效数字的字符为止，此时parseInt()将把该字符之前的字符串转换成数字。<br>    eg:<br>    如果要把字符串 “1234blue “转换成整数，那么parseInt()将返回1234，因为当它检测到字符b时，就会停止检测过程。<br>    parseInt()方法还有基模式，可以把二进制、八进制、十六进制或其他任何进制的字符串转换成整数。<br>    基是由parseInt()方法的第二个参数指定的，所以要解析十六进制的值，当然，对二进制、八进制，甚至十进制（默认模式），都可以这样调用parseInt()方法。<br>    如果十进制数包含前导0，那么最好采用基数10，这样才不会意外地得到八进制的值。<br>    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">parseInt</span>(<span class="string">"1234blue"</span>);<span class="comment">//return 1234</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">"22.5"</span>);<span class="comment">// return 22     对于整数来说，小数点是无效字符</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">"blue"</span>);<span class="comment">//return  NaN</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//parseInt()方法还有基模式，可以把二进制、八进制、十六进制或其他任何进制的字符串转换成整数。基是由parseInt()方法的第二个参数指定的。</span></span><br><span class="line">  <span class="comment">//例如：</span></span><br><span class="line">  <span class="built_in">parseInt</span>(<span class="string">"AF"</span>,<span class="number">16</span>); <span class="comment">//return 175 十六进制</span></span><br><span class="line">  <span class="built_in">parseInt</span>(<span class="string">"10"</span>,<span class="number">2</span>);<span class="comment">//return 2 二进制</span></span><br><span class="line">  <span class="built_in">parseInt</span>(<span class="string">"10"</span>,<span class="number">8</span>);<span class="comment">//return 8 八进制</span></span><br><span class="line">  <span class="built_in">parseInt</span>(<span class="string">"10"</span>,<span class="number">10</span>);<span class="comment">//return 10 十进制</span></span><br><span class="line">  <span class="comment">//如果十进制数包含前导0，那么最好采用基数10，这样才不会意外地得到八进制的值。</span></span><br><span class="line">  <span class="comment">//例如：</span></span><br><span class="line">  <span class="built_in">parseInt</span>(<span class="string">"010"</span>);<span class="comment">//return 8</span></span><br><span class="line">  <span class="built_in">parseInt</span>(<span class="string">"010"</span>,<span class="number">8</span>);<span class="comment">//return 8</span></span><br><span class="line">  <span class="built_in">parseInt</span>(<span class="string">"010"</span>,<span class="number">10</span>);<span class="comment">//return 10</span></span><br></pre></td></tr></table></figure></p>
+<p>（2）parseFloat()<br>    与parseInt()方法的处理方式相似，从位置0开始查看每个字符，直到找到第一个非有效的字符为止，然后把该字 符之前的字符串转换成数字。<br>    不过，对于这个方法来说，第一个出现的小数点是有效字符。如果有两个小数点，第二个小数点将被看作无效的， parseFloat<br>    ()方法会把这个小数点之前的字符串转换成数字。这意味着字符串 “22.34.5 “将被解析成22.34。<br>    使用parseFloat()方法的另一不同之处在于，字符串必须以十进制形式表示浮点数，而不能用八进制形式或十六进制形式。<br>    该方法会忽略前导0，所以八进制数0908将被解析为908。对于十六进制数0xA，该方法将返回NaN，因为在浮点数中，x不是有效字符。<br>    此外，parseFloat()也没有基模式。<br> <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parseFloat(&#34;1234blue&#34;);//return 1234.0&#10;&#10;parseFloat(&#34;22.34.5&#34;);//return 22.34&#10;&#10;parseFloat(&#34;0908&#34;);//return 908&#10;&#10;parseFloat(&#34;blue&#34;);//return NaN</span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://wwff.github.io/2015/11/12/剖析javascript/" data-title="javascript基础知识（一） | The blog of wf" data-tsina="3853559530" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/11/01/深度剖析z-index(1)/"  title="深度剖析z-index(1)">
+ <strong>下一篇:</strong><br/> 
+ <span>深度剖析z-index(1)
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript基础知识"><span class="toc-number">1.</span> <span class="toc-text">javascript基础知识</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://wwff.github.io/" target="_blank" title="LWF">WF's Blog</a></li>
+      <li><a href="http://blog.csdn.net/qq_21773607" target="_blank" title="CSDN">CSDN博客</a></li>
+      <li><a href="http://yangjian.me" target="_blank" title="YangJian">Alimon's Blog</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="https://github.com/wwff.atom## RSS address." target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m LWF. This is my blog on GitHub. <br/>
+			Constant dropping wears away a stone.  </p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/3853559530" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/wwff" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://wwff.github.io" target="_blank" title="lwf">lwf</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+  </body>
+</html>
