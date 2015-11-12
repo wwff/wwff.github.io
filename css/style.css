@@ -111,7 +111,7 @@ a img {
   -webkit-margin-after: 0;
 }
 body {
-  background: #ddd;
+  background: #e0f2fe;
   font-family: "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", Arial, sans-serif;
   font-size: 100%;
   color: #817c7c;
@@ -521,7 +521,7 @@ header nav ul li a {
   }
 }
 header nav ul li a:hover {
-  background: #dd2c11;
+  background: #851a0a;
   color: #e9cd4c;
 }
 .shownav {
@@ -1139,8 +1139,8 @@ footer.article-footer {
   content: "\f062";
 }
 .article-back-to-top:hover {
-  background: #762c54;
-  text-shadow: 0 1px #5e2343;
+  background: #e0f2fe;
+  text-shadow: 0 1px #83cbfb;
 }
 .qrcode {
   width: 15em;
