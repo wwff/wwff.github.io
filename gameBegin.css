@@ -1,0 +1,33 @@
+@charset "utf-8";
+/* CSS Document */
+/* 
+	时间：2015.12.15
+    内容：大白向前冲游戏开始页面样式表
+*/
+@media (min-width:320px){ 
+	#b_content {font-size:1em; padding-top:30em; }
+	#logo { margin:0 auto; width:52.75em; height:17.31em; }
+	#b_info {width:13.76em; padding:0.4em; font-size:3.125em;}
+	#begin_btn { font-size:4.375em;}
+}
+@media (min-width:960px){ 
+	/* #b_content {font-size:0.5em; adding-top:15em; padding-bottom:20em;} */
+}
+@media (min-width:1024px){ 
+	#b_content {font-size:0.4em; padding-top:15em; }
+	#logo { margin:0 auto; width:38.84em; height:12.75em; }
+	#begin_btn { font-size:4.375em;}
+}
+@media (min-width:1600px){ 
+	#b_content {font-size:2em; padding-top:20em; }
+	#logo {margin:0 auto; width:38.84em; height:12.75em; }
+	#b_info {width:10em; padding:0.4em; font-size:3.125em;}
+	#begin_btn {font-size:3em;}
+}
+html {font-size:100%;}
+body { background:url(../images/gameBegin_bg.jpg) no-repeat ; background-size:100%; }
+#logo img {width:100%; height:auto; max-width:100%; display:block; }
+#logo span {text-indent:-4000em; display:block;}
+#b_info { margin:2.9em auto 0.84em auto; background-color:#0643af; color:white; border:1px dotted white; }
+#begin_btn { width:9.58em; line-height:2.057em; cursor:pointer; background:url(../images/game_btn.png) no-repeat center; /* border-radius:4px; overflow:hidden; */  text-align:center; margin:auto;  }
+#begin_btn a {display:block; color:white; text-decoration:none;}

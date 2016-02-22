@@ -1,0 +1,37 @@
+@charset "utf-8";
+/* CSS Document */
+/* 
+	时间：2015.12.15
+    内容：大白向前冲游戏结束页面样式表
+*/
+
+/* game begin */
+@media (min-width:320px){
+	#e_content {font-size:1em; padding-top:32em; }
+	#grade-wrapper {width:40.75em; height:13.25em; padding:5.25em 2.5em;}
+}
+
+@media (min-width:1024px){
+	#e_content {font-size:0.4em; padding-top:18em;}
+	#grade-wrapper {width:30em; height:9.756em; padding:4em 2em;} 
+}
+@media (min-width:1600px){ 
+	#e_content {font-size:1.5em; padding-top:32em; }
+	#grade-wrapper {width:50em; height:20em; padding:5.25em 2.5em;}
+}
+
+html {font-size:100%;}
+body { background:url(../images/gameEnd_bg.jpg) no-repeat; background-size:100%; }
+#grade-wrapper {margin:0 auto; background-color:#93caff;  text-align:center;}
+#grade { color:#ff6f36; font-size:4.625em;}
+#info { color:#2874ef; font-size:4.375em; }
+.e_button {font-size: 4.375em; width:9.6em; line-height:2.06em; cursor:pointer; background:url(../images/game_btn.png) no-repeat center;  text-align:center; margin:auto; }
+.e_button a {display:block; color:white; text-decoration:none;}
+#e_again {margin-top:0.786em; }
+#e_show {margin-top:0.5em; } 
+/* end game begin */
+
+.shareImg{ width:100%;height:100%;position:absolute;top:0;left:0;display:none;background:url(../images/460.jpg);background-size: 100% 100%;z-index: 100}
+
+
+

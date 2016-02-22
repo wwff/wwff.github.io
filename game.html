@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>大白向前冲</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<link href="css/game.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript">
+	var start =  new Date().getTime()/1000;
+	var ms = 0;
+	var state = 0;
+	function timecount(){
+	    var time = document.getElementById('time');
+		 setTimeout('timecount()', 100);
+		 now = new Date();
+		 ms = now.getTime()/1000 - start;
+		 time.innerHTML = ms.toFixed(2) +'s';
+	}
+</script>
+</head>
+<body onload = 'timecount()'>
+
+  <div id = "game">
+	<div id="bayMax"></div>
+	<div id="xiaoHong"></div>
+    <div id = "time">0</div>
+    <!--shouji ceshi-->
+ </div>
+<script  src='js/move.js'></script>
+<script  src='js/main.js'></script>
+</body>
+</html>

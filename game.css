@@ -1,0 +1,170 @@
+	html {height: 100%;}
+	body {
+		background: url(../images/bg.jpg) repeat-x #c7c7c7;
+		background-size:contain;
+		height: 100%;
+		padding: 0;
+		margin:0;
+	}
+    
+    #e_content {display: none;}
+	@media all and (min-width: 300px)  and (max-width: 420px) {
+		html {
+			font-size: 10px;
+		}
+
+	}
+
+	@media all and (min-width: 421px)  and (max-width: 768px) {
+		html {
+			font-size: 13px;
+		}
+	/*	body {
+			background-size:700px 1000px;
+		}*/
+	}
+
+	@media all and (min-width: 768px) {
+		html {
+			font-size: 16px;
+		}
+	/*	body {
+			background-size: 1000px 500px;
+		}*/
+	}
+
+
+  
+
+
+@-webkit-keyframes move 
+{
+   0%{ left: 100% ;  }
+   100%{left: 0;}
+}
+
+
+.barry{
+        background: lightblue;
+        position:absolute;
+        top:50%;
+        left:70rem;
+        -webkit-animation:mov 2s linear;
+   }
+
+
+#time {
+	position:absolute;
+	top:1rem;
+	right:1rem;
+	font-size: 3rem;
+	font-weight: bold;	
+	color:red;
+}
+
+
+#bayMax,#xiaoHong {
+	position: absolute;
+	height:40%;
+	width:100%;
+	margin-bottom:3rem ;
+	overflow: hidden;
+}
+
+#xiaoHong {
+	border-bottom: 0.5rem solid #8d8d8d;
+	position: absolute;
+	bottom: 0;
+	height:60%;
+	margin-bottom: 0;
+}
+
+.baymax {
+	background:url(../images/baymax2.png) 100% 100% no-repeat;
+	bottom:0;
+	left: 15%;
+	position: absolute;
+	height: 1.2rem;
+	width: 5rem;
+	-webkit-animation:emit 0.5s infinite linear ;
+	z-index: 100;
+	/*transform*/
+	
+
+}
+
+.leapbaymax {
+	background:url(../images/baymax1.png) no-repeat right;
+	bottom:0;
+	left: 18%;
+	position: absolute;
+	height: 1.2rem;
+	width: 4rem;
+	-webkit-animation:leapb 1s ease-out;
+
+}
+.xiaoHong {
+	background:url(../images/boy1.png) cover no-repeat ;
+	bottom: 0.5rem;
+	left: 20%;
+	position: absolute;
+	height: 3.7rem;
+	width: 27px;
+	-webkit-animation:run 0.3s infinite ;/*1s-0.5s lj*/	
+	z-index: 100;
+}
+
+.leapxiaoHong {
+	background:url(../images/boy1.png) cover no-repeat ;
+	bottom: 0.5rem;
+	left: 20%;
+	position: absolute;
+	height: 3.7rem;
+	width: 2.5rem;
+	-webkit-animation:run 0.5s infinite,leaph 1s ease-out ;
+}
+
+
+@-webkit-keyframes run
+{
+	 0%{background:url(../images/boy1.png) no-repeat ;}
+	 50%{background:url(../images/boy2.png) no-repeat ;}
+	 100%{background:url(../images/boy3.png) no-repeat ;}
+}
+
+@-webkit-keyframes emit
+{
+	 0%{background:url(../images/baymax1.png) no-repeat right;}
+	 20%{background:url(../images/baymax2.png) no-repeat  right;}
+	 100%{background:url(../images/baymax2.png) no-repeat  right;}
+}
+
+@-webkit-keyframes leaph 
+{
+   0%{ bottom: 0px ;transform:rotate(7deg);
+          -webkit-transform:rotate(7deg); /* Safari 和 Chrome */
+      }
+   50%{bottom: 100px;transform:rotate(7deg);
+        -webkit-transform:rotate(7deg); /* Safari 和 Chrome */
+        }
+   100%{  bottom: 0px;}
+}
+@-webkit-keyframes leapb 
+{
+   0%{ bottom: 0px ;transform:rotate(-90deg);
+          -webkit-transform:rotate(-90deg); /* Safari 和 Chrome */
+      }
+   50%{bottom: 100px;transform:rotate(-90deg);
+        -webkit-transform:rotate(-90deg); /* Safari 和 Chrome */
+        }
+   100%{  bottom: 0px;}
+}
+
+@-webkit-keyframes mov 
+{
+   0%{ left: 100%;}
+   100%{left: -5%;}
+}
+
+.landmark { width:1.125rem;height:45px;overflow: hidden;position:absolute;left:100%;bottom:0;-webkit-animation:mov 2s linear}
+.landmark img {position: absolute;bottom:0;}
