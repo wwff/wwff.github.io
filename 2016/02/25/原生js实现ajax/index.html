@@ -1,0 +1,349 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>The blog of wf</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="lwf">
+    
+    <meta name="description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465function ajax(url,fns,fnf)&amp;#1">
+    
+    
+    
+    
+    <link rel="alternate" href="https://github.com/wwff.atom## RSS address." title="The blog of wf" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="The blog of wf" title="The blog of wf"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="The blog of wf">The blog of wf</a></h1>
+				<h2 class="blog-motto">不求做的最好，但求做的更好。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">主页 | Home</a></li>
+					
+						<li><a href="/archives">所有文章 | Archives</a></li>
+					
+						<li><a href="/about">简介 | About</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:wwff.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/02/25/原生js实现ajax/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://wwff.github.io" title="lwf">lwf</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-02-25T08:21:52.502Z" itemprop="datePublished">2016-02-25</time>
+    更新日期:<time datetime="2016-02-25T08:21:52.502Z" itemprop="dateModified">2016-02-25</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+		</div>
+		
+		<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="gherkin"></span><br><span class="line">function ajax(url,fns,fnf)&#123;</span><br><span class="line">	/<span class="keyword">*</span>if(window.XMLHttpRequest)&#123;</span><br><span class="line">			var oAjax=new XMLHttpRequest();</span><br><span class="line">			&#125;</span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">				var oAjax=new ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);	</span><br><span class="line">			&#125;</span><br><span class="line">		<span class="keyword">*</span>/</span><br><span class="line">		try&#123;</span><br><span class="line">			/<span class="keyword">*</span></span><br><span class="line">			 <span class="keyword">*</span>所有现代浏览器（IE7+、Firefox、Chrome、Safari 以及 Opera）均内建 XMLHttpRequest 对象</span><br><span class="line">			 <span class="keyword">*</span>仅IE6浏览器使用</span><br><span class="line">			<span class="keyword">*</span>/</span><br><span class="line">			var oAjax=new XMLHttpRequest();</span><br><span class="line">		&#125;	catch(e)&#123;</span><br><span class="line">			var oAjax=new ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		/<span class="keyword">*</span></span><br><span class="line">		1.用两次encodeURI()和一次decodeURI()进行编码解码</span><br><span class="line">  		2.get()方式有缓存，需要编码；post()无缓存，无需编码</span><br><span class="line">		 <span class="keyword">*</span>/</span><br><span class="line"></span><br><span class="line">		oAjax.open(<span class="string">"get"</span>,url,true);</span><br><span class="line">		/<span class="keyword">*</span></span><br><span class="line">		 <span class="keyword">*</span>GET - 从指定的资源请求数据</span><br><span class="line">		 <span class="keyword">*</span>GET 请求可被缓存</span><br><span class="line">		 <span class="keyword">*</span>GET 请求保留在浏览器历史记录中</span><br><span class="line">		 <span class="keyword">*</span>GET 请求可被收藏为书签</span><br><span class="line">		 <span class="keyword">*</span>GET 请求不应在处理敏感数据时使用</span><br><span class="line">		 <span class="keyword">*</span>GET 请求有长度限制</span><br><span class="line">		 <span class="keyword">*</span>GET 请求只应当用于取回数据</span><br><span class="line">		 <span class="keyword">*</span>POST - 向指定的资源提交要被处理的数据</span><br><span class="line">		 <span class="keyword">*</span>POST 请求不会被缓存</span><br><span class="line">		 <span class="keyword">*</span>POST 请求不会保留在浏览器历史记录中</span><br><span class="line">		 <span class="keyword">*</span>POST 不能被收藏为书签</span><br><span class="line">		 <span class="keyword">*</span>POST 请求对数据长度没有要求</span><br><span class="line">		 <span class="keyword">*</span>与 POST 相比，GET 更简单也更快，并且在大部分情况下都能用。然而，在以下情况中，请使用 POST 请求：</span><br><span class="line">		 <span class="keyword">*</span>无法使用缓存文件（更新服务器上的文件或数据库）</span><br><span class="line">		 <span class="keyword">*</span>向服务器发送大量数据（POST 没有数据量限制）</span><br><span class="line">		 <span class="keyword">*</span>发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠</span><br><span class="line">		 </span><br><span class="line">		 <span class="keyword">*</span>url--文件在服务器上的位置</span><br><span class="line">		 <span class="keyword">*</span>open()的第三个参数“true”表示异步；“false”表示同步</span><br><span class="line">		 <span class="keyword">*</span></span><br><span class="line">		 <span class="keyword">*</span>/</span><br><span class="line">		oAjax.send();//将请求发送到服务器</span><br><span class="line">	</span><br><span class="line">		oAjax.onreadystatechange=function()&#123;</span><br><span class="line">			/<span class="keyword">*</span>onreadystatechange 事件被触发 5 次（0 - 4），对应着readyState 的每个变化<span class="keyword">*</span>/</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			if(oAjax.readyState==4)&#123;</span><br><span class="line">				if(oAjax.status==200)&#123;</span><br><span class="line">					fns(oAjax.responseText);</span><br><span class="line">				&#125;</span><br><span class="line">				else&#123;</span><br><span class="line">					fnf(oAjax.status);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>注：<br>1、oAjax.readyState的值：服务器与浏览器进行到什么程度<br><img src="http://img.blog.csdn.net/20160225161908951" alt="readyState的值"></p>
+<p>2、xmlHttp.status的值（HTTP状态表）<br><img src="http://img.blog.csdn.net/20160225162154497" alt="这里写图片描述"></p>
+<p>100——客户必须继续发出请求<br>101——客户要求服务器根据请求转换HTTP协议版本 </p>
+<p>200——交易成功<br>201——提示知道新文件的URL<br>202——接受和处理、但处理未完成<br>203——返回信息不确定或不完整<br>204——请求收到，但返回信息为空<br>205——服务器完成了请求，用户代理必须复位当前已经浏览过的文件<br>206——服务器已经完成了部分用户的GET请求 </p>
+<p>300——请求的资源可在多处得到<br>301——删除请求数据<br>302——在其他地址发现了请求数据<br>303——建议客户访问其他URL或访问方式<br>304——客户端已经执行了GET，但文件未变化<br>305——请求的资源必须从服务器指定的地址得到<br>306——前一版本HTTP中使用的代码，现行版本中不再使用<br>307——申明请求的资源临时性删除 </p>
+<p>400——错误请求，如语法错误<br>401——请求授权失败<br>402——保留有效ChargeTo头响应<br>403——请求不允许<br>404——没有发现文件、查询或URl<br>405——用户在Request-Line字段定义的方法不允许<br>406——根据用户发送的Accept拖，请求资源不可访问<br>407——类似401，用户必须首先在代理服务器上得到授权<br>408——客户端没有在用户指定的饿时间内完成请求<br>409——对当前资源状态，请求不能完成<br>410——服务器上不再有此资源且无进一步的参考地址<br>411——服务器拒绝用户定义的Content-Length属性请求<br>412——一个或多个请求头字段在当前请求中错误<br>413——请求的资源大于服务器允许的大小<br>414——请求的资源URL长于服务器允许的长度<br>415——请求资源不支持请求项目格式<br>416——请求中包含Range请求头字段，在当前请求资源范围内没有range指示值，请求也不包含If-Range请求头字段<br>417——服务器不满足请求Expect头字段指定的期望值，如果是代理服务器，可能是下一级服务器不能满足请求 </p>
+<p>500——服务器产生内部错误<br>501——服务器不支持请求的函数<br>502——服务器暂时不可用，有时是为了防止发生系统过载<br>503——服务器过载或暂停维修<br>504——关口过载，服务器使用另一个关口或服务来响应用户，等待时间设定值较长<br>505——服务器不支持或拒绝支请求头中指定的HTTP版本 </p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://wwff.github.io/2016/02/25/原生js实现ajax/" data-title="The blog of wf" data-tsina="3853559530" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/11/26/javascript知识点（一）/"  title="javascript知识点（一）">
+ <strong>下一篇:</strong><br/> 
+ <span>javascript知识点（一）
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://wwff.github.io/" target="_blank" title="LWF">WF's Blog</a></li>
+      <li><a href="http://blog.csdn.net/qq_21773607" target="_blank" title="CSDN">CSDN博客</a></li>
+      <li><a href="http://yangjian.me" target="_blank" title="YangJian">Alimon's Blog</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="https://github.com/wwff.atom## RSS address." target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m LWF. This is my blog on GitHub. <br/>
+			Constant dropping wears away a stone.  </p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/3853559530" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/wwff" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
+		
+		<a href="http://wwff.github.io" target="_blank" title="lwf">lwf</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+  </body>
+</html>
