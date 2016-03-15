@@ -4,14 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>css的常用命名 | The blog of wf</title>
+    <title>javascript基础知识点（二） | The blog of wf</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="lwf">
     
-    <meta name="description" content="①骆驼命名（用于区别不同单词） ②划线命名法（表明从属关系）
-css命名规范
-头：header　　内容：content/container　　尾：footer　　导航：nav　　侧栏：sidebar栏目：column　　页面外围控制整体布局宽度：wrapper　　左右中：left right cen">
+    <meta name="description" content="1、+ 运算符的注意点“+”运算符的转换原则优先考虑字符串连接注：当加号运算符与字符串和数字一起使用的时候，需要优先考虑加法的结合性的对运算顺序的影响，即运算结果依赖于运算符的运算顺序eg:1 + 2 + “ girl”;   //“3 girl”1 + (2 + “ girl”); //“12 g">
     
     
     
@@ -71,15 +69,15 @@ css命名规范
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/09/09/CSS常用命名/" title="css的常用命名" itemprop="url">css的常用命名</a>
+      <a href="/2016/03/09/javascript基础知识点（一）/" title="javascript基础知识点（二）" itemprop="url">javascript基础知识点（二）</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://wwff.github.io" title="lwf">lwf</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-09-08T16:00:00.000Z" itemprop="datePublished">2015-09-09</time>
-    更新日期:<time datetime="2015-09-10T03:09:25.980Z" itemprop="dateModified">2015-09-10</time>
+    <time datetime="2016-03-09T11:40:14.127Z" itemprop="datePublished">2016-03-09</time>
+    更新日期:<time datetime="2016-03-09T11:40:14.127Z" itemprop="dateModified">2016-03-09</time>
     
   </p>
 </header>
@@ -91,26 +89,16 @@ css命名规范
 		
 		</div>
 		
-		<p>①骆驼命名（用于区别不同单词） ②划线命名法（表明从属关系）</p>
-<p>css命名规范</p>
-<p>头：header　　<br>内容：content/container　　<br>尾：footer　　<br>导航：nav　　<br>侧栏：sidebar<br>栏目：column　　<br>页面外围控制整体布局宽度：wrapper　　<br>左右中：left right center　　<br>登录条：loginbar　　<br>标志：logo　　<br>抽奖：raffle<br>广告：banner　　<br>页面主体：main　　<br>热点：hot　　<br>新闻：news<br>下载：download　　<br>子导航：subnav　　<br>菜单：menu　　<br>子菜单：submenu　　<br>搜索：search　　<br>友情链接：friendlink　　<br>页脚：footer　　<br>版权：copyright　　<br>滚动：scroll　　<br>内容：content<br>标签页：tab<br>文章列表：list<br>提示信息：msg<br>小技巧：tips<br>栏目标题：title<br>加入：joinus<br>指南：guild<br>服务：service<br>注册：regsiter<br>状态态：status<br>投票：vote<br>合作伙伴：partner </p>
-<p>注释的写法 </p>
-<p>/<em> Footer </em>/<br>内容区<br>/<em> End Footer </em>/ </p>
-<p>id的命名<br>容器: container<br>页头：header<br>内容：content/container<br>页面主体：main<br>页尾：footer<br>导航：nav<br>侧栏：sidebar<br>栏目：column<br>页面外围控制整体布局宽度：wrapper<br>左右中：left right center </p>
-<p>id的命名 </p>
-<p>页面结构 </p>
-<p>容器: container<br>页头：header<br>内容：content/container<br>页面主体：main<br>页尾：footer<br>导航：nav<br>侧栏：sidebar<br>栏目：column<br>页面外围控制整体布局宽度：wrapper<br>左右中：left right center </p>
-<p>导航 </p>
-<p>导航：nav<br>主导航：mainbav<br>子导航：subnav<br>顶导航：topnav<br>边导航：sidebar<br>左导航：leftsidebar<br>右导航：rightsidebar<br>菜单：menu<br>子菜单：submenu<br>标题: title<br>摘要: summary </p>
-<p>功能<br>标志：logo<br>广告：banner<br>登陆：login<br>登录条：loginbar<br>注册：regsiter<br>搜索：search<br>功能区：shop<br>标题：title<br>加入：joinus<br>状态：status<br>按钮：btn<br>滚动：scroll<br>标签页：tab<br>文章列表：list<br>提示信息：msg<br>当前的: current<br>小技巧：tips<br>图标: icon<br>注释：note<br>指南：guild<br>服务：service<br>热点：hot<br>新闻：news<br>下载：download<br>投票：vote<br>合作伙伴：partner<br>友情链接：link<br>版权：copyright </p>
-<p>class的命名 </p>
-<p>(1)颜色:使用颜色的名称或者16进制代码,如<br>.red { color: red; }<br>.f60 { color: #f60; }<br>.ff8600 { color: #ff8600; } </p>
-<p>(2)字体大小,直接使用”font+字体大小”作为名称,如<br>.font12px { font-size: 12px; }<br>.font9pt {font-size: 9pt; } </p>
-<p>(3)对齐样式,使用对齐目标的英文名称,如 </p>
-<p>.left { float:left; }<br>.bottom { float:bottom; } </p>
-<p>(4)标题栏样式,使用”类别+功能”的方式命名,如<br>.barnews { }<br>.barproduct { } </p>
-<p>注意事项 </p>
-<p>1.一律小写;<br>2.尽量用英文;<br>3.尽量不缩写，除非一看就明白的单词.<br>主要的 master.css<br>模块 module.css<br>基本共用 base.css<br>布局，版面 layout.css<br>主题 themes.css<br>专栏 columns.css<br>文字 font.css<br>表单 forms.css<br>补丁 mend.css<br>打印 print.css</p>
+		<p>1、+ 运算符的注意点<br>“+”运算符的转换原则优先考虑字符串连接<br>注：当加号运算符与字符串和数字一起使用的时候，需要优先考虑加法的结合性的对运算顺序的影响，即运算结果依赖于运算符的运算顺序<br>eg:<br>1 + 2 + “ girl”;   //“3 girl”<br>1 + (2 + “ girl”); //“12 girl”</p>
+<p>2、toString()与valueOf()的区别<br>(1)当需要进行类型转换的时候会首先调用valueOf()，再尝试使用toString()，日期类对象例外，日期对象只使用toString()转换</p>
+<p>3、delete运算符<br>（1）通过var语句声明的变量不能通过delete删除；通过function语句定义的函数和函数参数也不能删除<br>（2）在ES5中只有操作数是一个属性访问表达式的时候才会正常工作<br>（3）delete运算符只能删除自有属性，不能删除继承属性<br>（4）delete操作并不影响数组长度，只会将其变成稀疏数组</p>
+<p>4、函数声明<br>脚本中的所有函数和函数中所有嵌套的函数都会在当前上下文中其他代码之前声明，即可以在声明一个函数之前调用它</p>
+<p>5、continue与break、return<br>（1）continue与break是javascript中唯一可以使用语句标签的语句<br>（2）continue 语句中断循环中的迭代，如果出现了指定的条件，然后继续循环中的下一个迭代<br>（3）break 语句跳出循环后，会继续执行该循环之后的代码（如果有的话）</p>
+<p>6、创建对象的方法<br>（1）var o = {};<br>（2）var o = new Object();<br>（3）var o = Object.create(Object.prototype);<br>注；可以通过给Object.create()传入null来创建一个没有原型的新对象，但通过这种方式创建的对象不会继承任何东西，甚至不包括基础方法，比如toStrig()<br>//通过原型继承创建新对象<br>inherit(p)返回一个继承自原型对象p的属性的新对象<br>function inherit(p) {<br>    if(p == null) throw TypeError();<br>    if(Object.create){<br>        return Object.create(p);<br>    }<br>    var t = typeof p;<br>    if(t !== “object” &amp;&amp; t !== “function”) throw TypeError();<br>    function f() {};<br>    f.prototype = p;<br>    return new f();<br>}</p>
+<p>7、如果一个对象的属性名是保留字，则必须使用方括号的形式访问他们</p>
+<p>8、ECMAScript5中的对象存取器属性：getter和setter<br>javascript权威指南P132，<a href="http://sentsin.com/web/20.html" target="_blank" rel="external">http://sentsin.com/web/20.html</a></p>
+<p>9、检测一个对象是否是另一个对象的原型（或处于原型链中），可使用isPrototypeOf()方法<br>eg: p.isPrototypeOf(o); //检测p是否是o的原型</p>
+<p>10、ES3中的isArray()<br>var isArray = Function.isArray || function(o){<br>    return typeof o === “object” &amp;&amp; Object.prototype.toString.call(o) === “[object Array]”;<br>}<br>ES5中的Array.isArray()函数</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -120,7 +108,7 @@ css命名规范
 
 <div class="article-share" id="share">
 
-  <div data-url="http://wwff.github.io/2015/09/09/CSS常用命名/" data-title="css的常用命名 | The blog of wf" data-tsina="3853559530" class="share clearfix">
+  <div data-url="http://wwff.github.io/2016/03/09/javascript基础知识点（一）/" data-title="javascript基础知识点（二） | The blog of wf" data-tsina="3853559530" class="share clearfix">
   </div>
 
 </div>
@@ -130,13 +118,21 @@ css命名规范
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/09/09/css的知识点/" title="css">
+ <a href="/2016/03/15/Promise学习记录（一）/" title="Promise学习记录">
   <strong>上一篇:</strong><br/>
   <span>
-  css</span>
+  Promise学习记录</span>
 </a>
 </div>
 
+
+<div class="next">
+<a href="/2016/02/27/javascript基础知识点（二）/"  title="javascript基础知识点（二）">
+ <strong>下一篇:</strong><br/> 
+ <span>javascript基础知识点（二）
+</span>
+</a>
+</div>
 
 </nav>
 

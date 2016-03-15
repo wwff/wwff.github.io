@@ -1,0 +1,369 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Promise学习记录 | The blog of wf</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="lwf">
+    
+    <meta name="description" content="前言在网站开发中，会经常处理各种事件，如mouseclick/mouseover/click等等。在DOM 0事件模型，采取的事件监听方式是ele.onclick=handler，这会导致一个问题，如果想用hanlder2来监听click，则hanlder就会被覆盖，不会执行了，因为一次只能安排一个">
+    
+    
+    
+    
+    <link rel="alternate" href="https://github.com/wwff.atom## RSS address." title="The blog of wf" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="The blog of wf" title="The blog of wf"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="The blog of wf">The blog of wf</a></h1>
+				<h2 class="blog-motto">不求做的最好，但求做的更好。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">主页 | Home</a></li>
+					
+						<li><a href="/archives">所有文章 | Archives</a></li>
+					
+						<li><a href="/about">简介 | About</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:wwff.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/03/15/Promise学习记录（一）/" title="Promise学习记录" itemprop="url">Promise学习记录</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://wwff.github.io" title="lwf">lwf</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-03-15T02:46:10.324Z" itemprop="datePublished">2016-03-15</time>
+    更新日期:<time datetime="2016-03-15T02:46:10.315Z" itemprop="dateModified">2016-03-15</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+		</div>
+		
+		<p>前言<br>在网站开发中，会经常处理各种事件，如mouseclick/mouseover/click等等。在DOM 0事件模型，采取的事件监听方式是ele.onclick=handler，这会导致一个问题，如果想用hanlder2来监听click，则hanlder就会被覆盖，不会执行了，因为一次只能安排一个监听函数。但在DOM 2事件模型中，使用DOM方法中的addEventListener来添加事件监听就能解决这个问题，它支持你为一个事件添加多个处理程序。</p>
+<p>Ajax的调用也经历了类似的过程。</p>
+<p>在JQuery 1.5之前，Ajax仅支持一个回调函数，但在JQuery的1.5版本中，引入了 Deferred 对象，它允许注册多个回调函数，并且能传递任何同步或异步函数的执行状态–成功或失败。简单说， Deferred 对象就是jQuery的回调函数解决方案，它解决了如何处理耗时操作的问题，对那些操作提供了更好的控制，以及统一的编程接口。</p>
+<p>什么是Promise<br>Promise 对象用来进行延迟(deferred) 和异步(asynchronous ) 计算。回顾一下在JQuery 1.5之前，传统的Ajax操作写法：</p>
+<p>$.ajax({<br>  url: “/ServerResource.txt”,<br>  success: successFunction,<br>  error: errorFunction<br>});<br>$.ajax()操作完成后，如果使用的是低于1.5.0版本的jQuery，返回的是XHR对象，你没法进行链式操作；如果高于1.5.0版本，返回的是deferred对象，可以进行链式操作。</p>
+<p>现在，新的写法是这样的：</p>
+<p>var promise = $.ajax({<br>  url: “/ServerResource.txt”<br>});<br>promise.done(successFunction);<br>promise.fail(errorFunction);<br>promise.always(alwaysFunction);<br>在jQuery 1.6之前，always()相当于complete()，在done() 或 fail()执行完毕之后才执行，即无论Ajax的执行结果是什么，always()总会执行。</p>
+<p>done()， fail()， 和always()会返回同一个JQuery XMLHttpRequest(jqXHR)对象，所以可以进行链式调用：</p>
+<p>$.ajax( “example.php” )<br>    .done(function() { alert(“success”); })<br>    .fail(function() { alert(“error”); })<br>    .always(function() { alert(“complete”); });<br>deferred对象的一大好处，就是它允许你自由添加多个回调函数。</p>
+<p>$.ajax(“test.html”)<br>　　.done(function(){ alert(“哈哈，成功了！”);} )<br>　　.fail(function(){ alert(“出错啦！”); } )<br>　　.done(function(){ alert(“第二个回调函数！”);} );<br>回调函数可以添加任意多个，它们按照添加顺序执行。如果在后续的代码中还需要利用改jqXHR对象，就必须用变量保存：</p>
+<p>var jqxhr = $.ajax( “example.php” )<br>    .done(function() { alert(“success”); })<br>    .fail(function() { alert(“error”); })<br>    .always(function() { alert(“complete”); });<br>    // todo …<br>    // 再次调用<br>    jqxhr.always(function() { alert(“another complete”); });<br>另外一种产生链式调用的方式是利用Promise的 then 方法，它接受三个event handlers作为参数，在jquery 1.8之前，对于多个回调函数，有需要以数组方式传入三个参数：</p>
+<p>$.ajax({url: “/ServerResource.txt”})<br>.then([successFunction1, successFunction2, successFunction3],<br>    [errorFunction1, errorFunction2]);<br>//same as<br>var jqxhr = $.ajax({<br>  url: “/ServerResource.txt”<br>});<br>jqxhr.done(successFunction1);<br>jqxhr.done(successFunction2);<br>jqxhr.done(successFunction3);<br>jqxhr.fail(errorFunction1);<br>jqxhr.fail(errorFunction2);<br>1.8版本之后，then会返回一个新的Promise，它可以通过一个函数过滤掉Deferred对象的状态和值，用于取代不被推荐使用的 deferred.pipe() 方法。</p>
+<p>var promise = $.ajax({<br>  url: “/ServerResource.txt”<br>});<br>promise.then(successFunction, errorFunction);<br>//如果不想处理某个事件类型，可以传入Null<br>var promise = $.ajax({<br>  url: “/ServerResource.txt”<br>});<br>promise.then(successFunction); //no handler for the fail() event<br>then()方法还能逐次调用多个方法，可以用于处理有着先后顺序或者依赖的多个Ajax请求：</p>
+<p>var promise = $.ajax(“/myServerScript1”);<br>function getStuff() {<br>    return $.ajax(“/myServerScript2”);<br>}<br>promise.then(getStuff).then(function(myServerScript2Data){<br>  // Do something<br>});</p>
+<p>为多个操作指定回调函数<br>上文提到过，Deferred对象允许你为多个事件指定一个回调函数，这是传统写法做不到的。请看下面的代码，它用到了一个新的方法 $.when()：</p>
+<p>$.when($.ajax(“test1.html”), $.ajax(“test2.html”))<br>　　.done(function(){ alert(“哈哈，成功了！”); })<br>　　.fail(function(){ alert(“出错啦！”); });<br>　　<br>这段代码的意思是，先执行两个操作$.ajax(“test1.html”)和$.ajax(“test2.html”)，如果都成功了，就运行done()指定的回调函数；如果有一个失败或都失败了，就执行fail()指定的回调函数。</p>
+<p>$.when()的参数只能是deferred对象，如果不是，则done会立即执行：</p>
+<p>var wait = function(){<br>　　　　var tasks = function(){<br>　　　　　　alert(“执行完毕！”);<br>　　　　};<br>　　　　setTimeout(tasks,5000);<br>　　};<br>　　<br>　　$.when(wait())<br>　　.done(function(){ alert(“哈哈，成功了！”); })<br>　　.fail(function(){ alert(“出错啦！”); });<br>Promise的状态<br>在任何时刻，Promise只能处于三种状态之一：未完成(unfulfilled)、已完成(resolved)和已失败(resolved)。promise默认的状态是unresolved，任何处于回调队列的函数都会被执行。举个粟子，如果一个Ajax调用成功，$.resolved会被调用，同时promise的状态转为resolved，以及任何监听done的回调都会被执行；相反，则$.rejected会被调用，同时promise的状态转为rejected，以及任何监听fail的回调都会被执行。</p>
+<p>对上述的wait进行改写：</p>
+<p>var dtd = $.Deferred(); // 新建一个deferred对象<br>　　var wait = function(dtd){<br>　　　　var tasks = function(){<br>　　　　　　alert(“执行完毕！”);<br>　　　　　　dtd.resolve(); // 改变deferred对象的执行状态<br>　　　　　　//dtd.reject();  改变Deferred对象的执行状态<br>　　　　};<br>　　　　setTimeout(tasks,5000);<br>　　　　return dtd;<br>　　};<br>现在，wait()函数返回的是deferred对象，这就可以加上链式操作了。</p>
+<p>//wait()函数运行完，就会自动运行done()方法指定的回调函数。<br>$.when(wait(dtd))<br>　　.done(function(){ alert(“哈哈，成功了！”); })<br>　　.fail(function(){ alert(“出错啦！”); });<br>在ajax操作中，deferred对象会根据返回结果，自动改变自身的执行状态；但是，在wait()函数中，这个执行状态必须由程序员手动指定。调用dtd.resolve()，将dtd对象的执行状态从”未完成”改为”已完成”，从而触发done()方法。调用dtd.reject()，将dtd对象的执行状态从”未完成”改为”已失败”，从而触发fail()方法。</p>
+<p>但是这种写法是有问题的，因为dtd是一个全局对象，所以它的执行状态可以从外部改变。</p>
+<p>var dtd = $.Deferred(); // 新建一个Deferred对象<br>　　var wait = function(dtd){<br>　　　　var tasks = function(){<br>　　　　　　alert(“执行完毕！”);<br>　　　　　　dtd.resolve(); // 改变Deferred对象的执行状态<br>　　　　};<br>　　　　setTimeout(tasks,5000);<br>　　　　return dtd;<br>　　};<br>　　$.when(wait(dtd))<br>　　.done(function(){ alert(“哈哈，成功了！”); })<br>　　.fail(function(){ alert(“出错啦！”); });<br>　　dtd.resolve();    //在这里改变dtd的执行状态<br>我在代码的尾部加了一行dtd.resolve()，这就改变了dtd对象的执行状态，因此导致done()方法立刻执行，跳出”哈哈，成功了！”的提示框，等5秒之后再跳出”执行完毕！”的提示框。</p>
+<p>为了避免这种情况，可以在内部建立Deferred对象：</p>
+<p>var wait = function(dtd){<br>       var dtd = $.Deferred(); // 在内部新建一个Deferred对象<br>　　　　var tasks = function(){<br>　　　　　　alert(“执行完毕！”);<br>　　　　　　dtd.resolve(); // 改变Deferred对象的执行状态<br>　　　　};<br>　　　　setTimeout(tasks,5000);<br>　　　　return dtd;<br>　　};<br>另外一个方式是利用 deferred.promise() 方法：</p>
+<p>The deferred.promise() method allows an asynchronous function to prevent other code from interfering with the progress or status of its internal request. The Promise exposes only the Deferred methods needed to attach additional handlers or determine the state (then, done, fail, always, pipe, progress, state and promise), but not ones that change the state (resolve, reject, notify, resolveWith, rejectWith, and notifyWith).<br>也就是说，deferred.promise() 只是阻止其他代码来改变这个 deferred 对象的状态。可以理解成，通过 deferred.promise() 方法返回的 deferred promise 对象，是没有 resolve ,reject, progress , resolveWith, rejectWith , progressWith 这些可以改变状态的方法，你只能使用 done, then ,fail 等方法添加 handler 或者判断状态。</p>
+<p>var dtd = $.Deferred();  //新建一个延迟对象<br>var wait = function(dtd){<br>　　　　var tasks = function(){<br>　　　　　　alert(“执行完毕！”);<br>　　　　　　dtd.resolve(); // 改变Deferred对象的执行状态<br>　　　　};<br>　　　　setTimeout(tasks,5000);<br>　　　　return dtd.promise(); // 返回promise对象<br>　　};<br>下一篇会说说关于Promise的单元测试。</p>
+<p>参考文章：<br> <a href="http://www.htmlgoodies.com/beyond/javascript/making-promises-with-jquery-deferred.html" target="_blank" rel="external">Making Promises With jQuery Deferred</a><br><a href="http://www.ruanyifeng.com/blog/2011/08/a_detailed_explanation_of_jquery_deferred_object.html" target="_blank" rel="external">jQuery的deferred对象详解</a><br>原文链接：<a href="http://www.ido321.com/1643.html" target="_blank" rel="external">淡忘~浅思 » JQuery的Promise详解(一):Promise基础</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://wwff.github.io/2016/03/15/Promise学习记录（一）/" data-title="Promise学习记录 | The blog of wf" data-tsina="3853559530" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/03/09/javascript基础知识点（一）/"  title="javascript基础知识点（二）">
+ <strong>下一篇:</strong><br/> 
+ <span>javascript基础知识点（二）
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://wwff.github.io/" target="_blank" title="LWF">WF's Blog</a></li>
+      <li><a href="http://blog.csdn.net/qq_21773607" target="_blank" title="CSDN">CSDN博客</a></li>
+      <li><a href="http://yangjian.me" target="_blank" title="YangJian">Alimon's Blog</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="https://github.com/wwff.atom## RSS address." target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m LWF. This is my blog on GitHub. <br/>
+			Constant dropping wears away a stone.  </p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/3853559530" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/wwff" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
+		
+		<a href="http://wwff.github.io" target="_blank" title="lwf">lwf</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+  </body>
+</html>
